@@ -1,0 +1,23 @@
+{% if messages %}
+    {% for message in messages %}
+        <p style="color:green;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+
+    Username: <input type="text" name="username"><br><br>
+    Password: <input type="password" name="password"><br><br>
+    Contact No: <input type="text" name="contact"><br><br>
+
+    Gender:
+    <select name="gender">
+        <option>Male</option>
+        <option>Female</option>
+    </select><br><br>
+
+    Email ID: <input type="email" name="email"><br><br>
+    Address: <textarea name="address"></textarea><br><br>
+
+    <button type="submit">Submit</button>
+</form>

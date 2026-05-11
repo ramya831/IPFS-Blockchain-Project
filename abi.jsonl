@@ -1,0 +1,20 @@
+from web3 import Web3
+import json
+import os
+
+# Connect to Ganache
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:7545"))
+
+assert w3.is_connected(), "Ganache not connected"
+
+# Contract address (COPY from Remix)
+contract_address = "0xd9145CCE52D386f254917e481eB44e9943F39138"
+
+# Load ABI
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+abi_path = os.path.join(BASE_DIR, "app", "abi.json")
+
+with open(abi_path) as f:
+    abi = json.load(f)
+
+contract = w3.eth.contract(address=contract_address, abi=abi)

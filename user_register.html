@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <div class="register-card">
+        <h2>Create Account</h2>
+        <p class="subtitle">Please fill in the details to register</p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input type="text" name="full_name" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="contact" placeholder="Contact Number" required>
+            </div>
+
+            <div class="form-group">
+                <textarea name="address" placeholder="Address" required></textarea>
+            </div>
+
+            <div class="form-group gender">
+                <label>Gender</label>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a href="/login/">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

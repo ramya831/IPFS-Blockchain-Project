@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Storage Overhead Graph</title>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h2>Storage Overhead Graph</h2>
+
+    <!-- Canvas for graph -->
+    <canvas id="storageChart" width="400" height="200"></canvas>
+
+    <br>
+    <a href="/home/">Back</a>
+
+    <script>
+        const ctx = document.getElementById('storageChart').getContext('2d');
+
+        const storageChart = new Chart(ctx, {
+            type: 'bar',   // bar / line / pie
+            data: {
+                labels: ['Original File', 'Encrypted File', 'IPFS Storage'],
+                datasets: [{
+                    label: 'Storage Size (MB)',
+                    data: [10, 14, 11],   // example values
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(75, 192, 192, 0.6)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+<a href="{% url 'dashboard' %}">Back</a>
+</body>
+</html>

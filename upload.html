@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File to IPFS</title>
+</head>
+<body>
+
+<h2>Upload File to IPFS</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" required>
+    <br><br>
+    <button type="submit">Upload</button>
+</form>
+
+{% if ipfs_hash %}
+    <p style="color:green;">
+        Upload successful ✅
+    </p>
+    <p><b>IPFS Hash:</b> {{ ipfs_hash }}</p>
+    <a  href="https://ipfs.io/ipfs/{{ ipfs_hash }}" target="_blank">
+            View File on IPFS
+    </a>
+{% endif %}
+
+{% if error %}
+    <p style="color:red;">
+        Error: {{ error }}
+    </p>
+{% endif %}
+
+</body>
+</html>
+
+
+

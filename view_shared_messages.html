@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Shared Messages</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #1e293b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h2>View Shared Messages</h2>
+
+<!-- In app/view_shared_messages.html -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data Owner</th>
+            <th>Shared Message</th>
+            <th>IPFS File Address</th>
+            <th>Shared Date & Time</th>
+            <th>Shared File Name</th>
+            <th>Shared Data User</th>
+            <th>Download File</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Loop through the 'data' passed from the view function -->
+        {% for item in data %}
+        {% load app_filters %}
+
+        <tr>
+            <!-- Access attributes of the SharedData model -->
+            <td>{{ item.data_owner.username }}</td>
+            <td>{{ item.message }}</td>
+            <td>{{ item.ipfs_hash }}</td>
+            <td>{{ item.shared_date_time|date:"d-m-Y H:i:s" }}</td>
+            <td>{{ item.file.name|basename }}</td> <!-- Assuming 'file' is the FileField -->
+            <td>{{ item.shared_user.username }}</td>
+            <td>
+                <!-- Link to the actual file URL -->
+                {% if item.file %}
+                <a href="{{ item.file.url }}" download>Click Here</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <!-- This block is displayed if the 'data' list is empty -->
+        <tr>
+            <td colspan="7">No Shared Data Available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

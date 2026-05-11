@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Shared Messages</title>
+</head>
+<body>
+
+<h2>Shared Files</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Data Owner</th>
+        <th>Message</th>
+        <th>File</th>
+        <th>Shared Date</th>
+        <th>Download</th>
+    </tr>
+
+    {% for data in shared_data %}
+    <tr>
+        <td>{{ data.data_owner.username }}</td>
+        <td>{{ data.message }}</td>
+        <td>{{ data.file.name }}</td>
+        <td>{{ data.shared_at }}</td>
+        <td>
+            <a href="{{ data.file.url }}" download>Download</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No shared files</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

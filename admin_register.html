@@ -1,0 +1,73 @@
+{% if message %}
+    <div style="color: green; margin-bottom: 15px;">
+        {{ message }}
+    </div>
+{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/admin_style.css' %}">
+</head>
+<body>
+
+<div class="register-container">
+    <div class="register-card admin-card">
+
+        <h2>Admin Registration</h2>
+        <p class="subtitle">Create administrator account</p>
+
+        {% if message %}
+            <div style="color: green; margin-bottom: 15px;">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div style="color: red; margin-bottom: 15px;">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input type="text" name="full_name" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Admin Username" required>
+            </div>
+
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Official Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="contact" placeholder="Contact Number (Optional)">
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+
+            <button type="submit" class="register-btn admin-btn">
+                Register Admin
+            </button>
+        </form>
+        <p class="login-link">
+            Already have an account? <a href="/admin/login/">Login</a> 
+
+        </p>
+
+    </div>
+</div>
+
+</body>
+</html>
